@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 4.0)
-project(benchmark_case01)
+project(benchmark_case02)
 
 function(force_redefine_file_macro_for_sources targetname)
     get_target_property(source_files "${targetname}" SOURCES)
