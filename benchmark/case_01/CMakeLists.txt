@@ -7,9 +7,9 @@ function(force_redefine_file_macro_for_sources targetname)
         # Get source file's current list of compile definitions.
         get_property(defs SOURCE "${sourcefile}"
                 PROPERTY COMPILE_DEFINITIONS)
-        # Get the relative path of the source file in project directory
+        # Get the source file path relative to the project root.
         get_filename_component(filepath "${sourcefile}" ABSOLUTE)
-        string(REPLACE ../.. "" relpath ${filepath})
+        file(RELATIVE_PATH relpath "${CMAKE_SOURCE_DIR}" "${filepath}")
         list(APPEND defs "__FILE__=\"${relpath}\"")
         # Set the updated compile definitions on the source file.
         set_property(

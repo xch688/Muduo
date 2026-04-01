@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 4.0)
-project(benchmark_case03)
+project(threadLocal)
 
 function(force_redefine_file_macro_for_sources targetname)
     get_target_property(source_files "${targetname}" SOURCES)
@@ -52,11 +52,12 @@ aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR} SRCS)
 add_compile_options(-g -gdwarf-4 -fno-omit-frame-pointer)
 
 add_executable(${PROJECT_NAME} ${SRCS} ${LOG_SRCS})
-target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR})
+force_redefine_file_macro_for_sources(${PROJECT_NAME})
 
+target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR})
 # 注意：Benchmark 依赖 pthread（线程库），必须一起链接
 target_link_libraries(${PROJECT_NAME} benchmark::benchmark pthread)
-force_redefine_file_macro_for_sources(${PROJECT_NAME})
+
 
 set(OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 set_target_properties(${PROJECT_NAME} PROPERTIES
