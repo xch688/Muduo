@@ -1,5 +1,9 @@
 # Prerequisites
 *.d
+cmake-build-local-release
+cmake-build-*
+.idea
+bin
 
 # Compiled Object files
 *.slo
